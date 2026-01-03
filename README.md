@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.1.0-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.2-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -298,15 +298,15 @@ plugin.zip
 
 ### 安装脚本格式（.install）
 
-详见 [插件安装脚本文档](../docs/插件安装脚本文档.md)
+详见 [插件安装脚本文档](docs/插件安装脚本文档.md)
 
 ### Hook 配置格式（.hook）
 
-详见 [插件安装脚本文档](../docs/插件安装脚本文档.md)（Hook 系统部分）
+详见 [插件安装脚本文档](docs/插件安装脚本文档.md)（Hook 系统部分）
 
 ## 📝 更新日志
 
-### v1.1.0
+### v1.0.2
 - 新增 Clangd LSP 智能代码分析支持
 - 新增插件安装脚本系统（.install 文件）
 - 新增插件 Hook 系统（.hook 文件）
