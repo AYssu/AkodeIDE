@@ -1,0 +1,102 @@
+{
+  "menu": [
+    {
+      "title": "NDK编译",
+      "position": "start",
+      "onClick": [
+        {
+          "node": "command_result",
+          "sh": "dir=\"${current_dir}\"; while [ \"$dir\" != \"/\" ]; do if [ -d \"$dir/jni\" ]; then echo \"$dir\"; exit 0; fi; dir=$(dirname \"$dir\"); done; echo \"${current_dir}\"",
+          "dir": "${current_dir}",
+          "loading": "查找项目目录...",
+          "success": [
+            {
+              "node": "create_value",
+              "name": "project_dir",
+              "type": "string",
+              "value": "${cmd_output}"
+            },
+            {
+              "node": "command_result",
+              "sh": "ndk-build",
+              "dir": "${project_dir}",
+              "loading": "正在编译...",
+              "success": [
+                {
+                  "node": "grep",
+                  "input": "${cmd_output}",
+                  "pattern": "=> (libs/[^\\s]+)",
+                  "target": "exe_files",
+                  "group": 1
+                },
+                {
+                  "node": "if",
+                  "var": "exe_files",
+                  "type": "empty",
+                  "success": [
+                    {
+                      "node": "alert",
+                      "title": "编译成功",
+                      "message": "编译完成，但未找到输出文件\n\n${cmd_output}"
+                    }
+                  ],
+                  "error": [
+                    {
+                      "node": "select",
+                      "title": "选择要运行的文件",
+                      "items": "${exe_files}",
+                      "target": "selected_file",
+                      "multi": false
+                    },
+                    {
+                      "node": "if",
+                      "var": "selected_file",
+                      "type": "not_empty",
+                      "success": [
+                        {
+                          "node": "command",
+                          "sh": "mkdir -p ${plugin_path}/tmp && cp \"${project_dir}/${selected_file}\" ${plugin_path}/tmp/ && chmod 777 ${plugin_path}/tmp/*"
+                        },
+                        {
+                          "node": "command_result",
+                          "sh": "basename \"${selected_file}\"",
+                          "dir": "${plugin_path}",
+                          "success": [
+                            {
+                              "node": "create_value",
+                              "name": "exe_name",
+                              "type": "string",
+                              "value": "${cmd_output}"
+                            },
+                            {
+                              "node": "run_in_terminal",
+                              "file": "${plugin_path}/tmp/${exe_name}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "error": [
+                {
+                  "node": "alert",
+                  "title": "编译失败",
+                  "message": "NDK 编译失败！\n\n错误信息：\n${cmd_error}"
+                }
+              ]
+            }
+          ],
+          "error": [
+            {
+              "node": "alert",
+              "title": "错误",
+              "message": "查找项目目录失败"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

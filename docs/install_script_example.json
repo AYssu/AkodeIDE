@@ -1,0 +1,106 @@
+{
+  "install_before": [
+    {
+      "node": "create_value",
+      "name": "user_name",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "node": "create_value",
+      "name": "install_type",
+      "type": "string",
+      "value": "full"
+    },
+    {
+      "node": "alert",
+      "title": "欢迎",
+      "message": "欢迎使用 NDK 安装插件！\n本插件提供 NDK 编译环境。"
+    },
+    {
+      "node": "edit",
+      "title": "输入用户名",
+      "hint": "请输入您的名字",
+      "target": "user_name",
+      "default": "Developer"
+    },
+    {
+      "node": "if",
+      "var": "user_name",
+      "type": "empty",
+      "success": [
+        {
+          "node": "alert",
+          "title": "提示",
+          "message": "您没有输入用户名，将使用默认值"
+        },
+        {
+          "node": "create_value",
+          "name": "user_name",
+          "type": "string",
+          "value": "Guest"
+        }
+      ],
+      "error": [
+        {
+          "node": "alert",
+          "title": "欢迎",
+          "message": "你好，${user_name}！"
+        }
+      ]
+    },
+    {
+      "node": "select",
+      "title": "选择安装类型",
+      "items": ["完整安装", "最小安装", "自定义"],
+      "target": "install_type",
+      "multi": false
+    },
+    {
+      "node": "if",
+      "var": "install_type",
+      "type": "==",
+      "value": "自定义",
+      "success": [
+        {
+          "node": "select",
+          "title": "选择组件",
+          "items": ["GCC", "Clang", "CMake", "Make", "GDB"],
+          "target": "components",
+          "multi": true
+        },
+        {
+          "node": "alert",
+          "title": "已选择",
+          "message": "您选择了: ${components}"
+        }
+      ]
+    }
+  ],
+  "install_start": [
+    {
+      "node": "alert",
+      "title": "开始安装",
+      "message": "正在解压文件，请稍候..."
+    },
+    {
+      "node": "command",
+      "sh": "cd ${plugin_path} && tar -xzvf android-ndk-r24.tar.gz"
+    },
+    {
+      "node": "command",
+      "sh": "chmod +x ${plugin_path}/android-ndk-r24/toolchains/llvm/prebuilt/linux-aarch64/bin/*"
+    }
+  ],
+  "install_after": [
+    {
+      "node": "add_path",
+      "export": "${plugin_path}/android-ndk-r24:${plugin_path}/android-ndk-r24/toolchains/llvm/prebuilt/linux-aarch64/bin"
+    },
+    {
+      "node": "alert",
+      "title": "安装完成",
+      "message": "NDK 已成功安装！\n\n用户: ${user_name}\n安装类型: ${install_type}"
+    }
+  ]
+}

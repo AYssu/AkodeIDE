@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.0.1-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.1.0-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -21,13 +21,22 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - 符号快捷输入栏
 - 支持多种编辑器主题
 
-### 🔧 编译运行
+### 🧠 LSP 智能支持（新增）
+- 集成 Clangd LSP 服务
+- 实时语法错误检测
+- 智能代码补全
+- 函数签名提示
+- 代码诊断和错误标记
+- 支持跳转到定义（规划中）
+
+### �  编译运行
 - 内置 GCC/G++ 编译器（首次启动自动安装）
 - 支持 C 语言（.c）和 C++ 语言（.cpp/.cc/.cxx）
 - 自定义编译参数
 - 自定义编译命令管理
 - 支持 Root 权限运行程序
 - 编译错误定位和标记
+- 编译缓存（相同代码跳过编译）
 
 ### 📁 文件管理
 - 侧边栏文件浏览器
@@ -42,12 +51,117 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - 可调节字体大小和样式
 - 底部快捷操作栏
 - 屏幕常亮选项
+- 自动加载插件环境变量
 
 ### 🧩 插件系统
 - 支持安装第三方插件（ZIP格式）
 - 插件 ABI 选择（arm64-v8a / x86_64）
 - 插件启用/禁用管理
 - 查看插件示例代码
+- **插件安装脚本**（.install 文件）
+- **插件 Hook 系统**（.hook 文件）
+- 插件 PATH 环境变量自动注入
+
+## 🔌 插件安装脚本（新增）
+
+插件可以通过 `.install` 文件定义安装流程，支持交互式安装向导。
+
+### 支持的节点类型
+
+| 节点 | 说明 |
+|------|------|
+| `alert` | 弹窗提示 |
+| `edit` | 单行输入框 |
+| `select` | 单选/多选列表 |
+| `if` | 条件判断分支 |
+| `command` | 执行 Shell 命令 |
+| `command_result` | 执行命令并获取结果（带 Loading） |
+| `grep` | 正则表达式匹配 |
+| `add_path` | 添加环境变量路径 |
+| `create_value` | 创建变量 |
+| `run_in_terminal` | 在终端运行可执行文件 |
+
+### 内置变量
+
+| 变量 | 说明 |
+|------|------|
+| `${plugin_path}` | 当前插件安装目录 |
+| `${plugin_name}` | 插件目录名 |
+| `${files_dir}` | 应用 files 目录 |
+| `${cache_dir}` | 应用缓存目录 |
+| `${current_file}` | 当前编辑器打开的文件路径（Hook 中可用） |
+| `${current_dir}` | 当前文件所在目录（Hook 中可用） |
+
+### 示例
+
+```json
+{
+  "install_before": [
+    {"node": "alert", "title": "欢迎", "message": "即将安装 NDK 插件"}
+  ],
+  "install_start": [
+    {"node": "command", "sh": "tar -xzf ${plugin_path}/ndk.tar.gz"}
+  ],
+  "install_after": [
+    {"node": "add_path", "export": "${plugin_path}/bin"}
+  ]
+}
+```
+
+## 🪝 插件 Hook 系统（新增）
+
+插件可以通过 `.hook` 文件在特定事件时执行自定义操作。
+
+### 支持的 Hook 类型
+
+| Hook | 说明 |
+|------|------|
+| `menu` | 添加编辑器右上角菜单项 |
+| `toolbar` | 添加工具栏按钮（规划中） |
+| `on_compile_before` | 编译前执行 |
+| `on_compile_success` | 编译成功后执行 |
+| `on_compile_error` | 编译失败后执行 |
+| `on_run_before` | 运行前执行 |
+| `on_app_init` | 应用启动时执行 |
+
+### 菜单 Hook 示例
+
+```json
+{
+  "menu": [
+    {
+      "title": "NDK编译",
+      "position": "start",
+      "onClick": [
+        {
+          "node": "command_result",
+          "sh": "ndk-build",
+          "dir": "${current_dir}",
+          "loading": "正在编译...",
+          "success": [
+            {"node": "alert", "title": "成功", "message": "${cmd_output}"}
+          ],
+          "error": [
+            {"node": "alert", "title": "失败", "message": "${cmd_error}"}
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 事件 Hook 示例
+
+```json
+{
+  "events": {
+    "on_compile_success": [
+      {"node": "command", "sh": "echo '编译成功' >> ${plugin_path}/log.txt"}
+    ]
+  }
+}
+```
 
 ## 📱 系统要求
 
@@ -76,7 +190,7 @@ int main() {
 ```
 3. 点击工具栏的运行按钮（▶）编译并运行
 
-## 📖 使用指南
+## � 使用指南
 
 ### 编辑器操作
 
@@ -133,6 +247,7 @@ int main() {
 - **记住上次打开的文件**：下次启动时恢复上次的文件和目录
 - **编辑器字体大小**：12-24sp 可选
 - **编辑器主题**：Darcula（暗色）等主题
+- **启用 Clangd LSP**：开启智能代码分析（需要安装 Clangd 插件）
 
 ### 终端设置
 - **终端字体大小**：10-24sp 可选
@@ -160,6 +275,9 @@ int main() {
 ```
 plugin.zip
 ├── .config          # 插件配置文件（JSON格式，必需）
+├── .install         # 安装脚本（JSON格式，可选）
+├── .hook            # Hook 配置（JSON格式，可选）
+├── .path            # 环境变量路径（安装后自动生成）
 ├── lib/
 │   ├── arm64-v8a/   # arm64 架构的 .so 文件
 │   └── x86_64/      # x86_64 架构的 .so 文件
@@ -177,6 +295,37 @@ plugin.zip
   "supportABI": ["arm64-v8a", "x86_64"]
 }
 ```
+
+### 安装脚本格式（.install）
+
+详见 [插件安装脚本文档](../docs/插件安装脚本文档.md)
+
+### Hook 配置格式（.hook）
+
+详见 [插件安装脚本文档](../docs/插件安装脚本文档.md)（Hook 系统部分）
+
+## 📝 更新日志
+
+### v1.1.0
+- 新增 Clangd LSP 智能代码分析支持
+- 新增插件安装脚本系统（.install 文件）
+- 新增插件 Hook 系统（.hook 文件）
+- 新增插件 PATH 环境变量自动注入
+- 新增编辑器菜单 Hook 支持
+- 新增编译事件 Hook（编译前/成功/失败）
+- 新增运行事件 Hook（运行前）
+- 新增 `command_result` 节点（带 Loading 和结果分支）
+- 新增 `grep` 节点（正则表达式匹配）
+- 新增 `run_in_terminal` 节点（在终端运行文件）
+- 优化编译流程，支持编译缓存
+- 修复多项已知问题
+
+### v1.0.1
+- 初始版本发布
+- 基础代码编辑器功能
+- GCC/G++ 编译支持
+- 终端模拟器
+- 插件系统基础功能
 
 ## 🙏 致谢
 
