@@ -98,5 +98,19 @@
         }
       ]
     }
+  ],
+  
+  "run_menu": [
+    {
+      "title": "NDK运行",
+      "icon": "Base64编码的SVG图标",
+      "position": "start",
+      "onClick": [
+        {
+          "node": "toast",
+          "message": "执行 NDK 运行..."
+        }
+      ]
+    }
   ]
 }

@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.0.2-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.3-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -117,7 +117,8 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 | Hook | 说明 |
 |------|------|
 | `menu` | 添加编辑器右上角菜单项 |
-| `toolbar` | 添加工具栏按钮（规划中） |
+| `run_menu` | 添加运行按钮下拉菜单项 |
+| `toolbar` | 添加工具栏按钮 |
 | `on_compile_before` | 编译前执行 |
 | `on_compile_success` | 编译成功后执行 |
 | `on_compile_error` | 编译失败后执行 |
@@ -237,8 +238,8 @@ int main() {
 |------|------|
 | ➕ 按钮 | 安装插件（选择 ZIP 文件） |
 | 点击插件 | 查看插件示例代码 |
-| 长按插件 | 删除插件 |
-| 点击 ABI 标签 | 切换插件 ABI |
+| 卸载按钮 | 删除插件 |
+| 点击 ABI 标签 | 切换插件 ABI（多 ABI 时显示） |
 | 开关按钮 | 启用/禁用插件 |
 
 ## ⚙️ 设置选项
@@ -288,11 +289,13 @@ plugin.zip
 ### 配置文件格式（.config）
 ```json
 {
-  "pluginCode": "my_plugin",
-  "pluginName": "我的插件",
-  "pluginVersion": "1.0.0",
-  "pluginDescribe": "插件描述",
-  "supportABI": ["arm64-v8a", "x86_64"]
+  "plugin_code": "my_plugin",
+  "plugin_name": "我的插件",
+  "plugin_version": "1.0.0",
+  "plugin_describe": "插件描述",
+  "author": "作者名称",
+  "github": "https://github.com/xxx/xxx",
+  "support_ABI": ["arm64-v8a", "x86_64"]
 }
 ```
 
@@ -305,6 +308,14 @@ plugin.zip
 详见 [插件安装脚本文档](docs/插件安装脚本文档.md)（Hook 系统部分）
 
 ## 📝 更新日志
+
+### v1.0.3
+- 新增插件 `author` 字段支持，显示插件作者信息
+- 新增 `run_menu` Hook，支持在运行按钮下拉菜单添加自定义项
+- 优化插件列表 UI，新增卸载按钮
+- 修复保存按钮点击无反应的问题
+- 修复首次启动状态栏显示紫色的问题
+- 修复首次打开编辑器显示白色主题的问题
 
 ### v1.0.2
 - 新增 Clangd LSP 智能代码分析支持
