@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.0.3-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.4-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -114,16 +114,16 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 
 ### 支持的 Hook 类型
 
-| Hook | 说明 |
-|------|------|
-| `menu` | 添加编辑器右上角菜单项 |
-| `run_menu` | 添加运行按钮下拉菜单项 |
-| `toolbar` | 添加工具栏按钮 |
-| `on_compile_before` | 编译前执行 |
-| `on_compile_success` | 编译成功后执行 |
-| `on_compile_error` | 编译失败后执行 |
-| `on_run_before` | 运行前执行 |
-| `on_app_init` | 应用启动时执行 |
+| Hook | 说明 | 版本 |
+|------|------|------|
+| `menu` | 添加编辑器右上角菜单项 | v1.0.2+ |
+| `run_menu` | 添加运行按钮下拉菜单项 | v1.0.3+ |
+| `toolbar` | 添加工具栏按钮 | v1.0.4+ |
+| `on_compile_before` | 编译前执行 | v1.0.2+ |
+| `on_compile_success` | 编译成功后执行 | v1.0.2+ |
+| `on_compile_error` | 编译失败后执行 | v1.0.2+ |
+| `on_run_before` | 运行前执行 | v1.0.2+ |
+| `on_app_init` | 应用启动时执行 | v1.0.4+ |
 
 ### 菜单 Hook 示例
 
@@ -257,8 +257,8 @@ int main() {
 
 ### 编译设置
 - **编译命令管理**：自定义编译和运行命令
-- **GCC 编译参数**：C 语言编译参数（默认：`-lm -ldl -llog -lz -std=c99 -Wfatal-errors -Os -s -pie`）
-- **G++ 编译参数**：C++ 编译参数（默认：`-lm -ldl -llog -lz -std=c++14 -Wfatal-errors -Os -s -pie`）
+- **Clang 编译参数**：C 语言编译参数（默认：`-lm -ldl -llog -lz -std=c99 -Wfatal-errors -Os -s -pie`）
+- **Clang++ 编译参数**：C++ 编译参数（默认：`-lm -ldl -llog -lz -std=c++17 -Wfatal-errors -Os -s -pie`）
 
 ### 功能设置
 - **启用 Root 运行**：使用 su 以 root 权限执行程序
@@ -309,6 +309,16 @@ plugin.zip
 
 ## 📝 更新日志
 
+### v1.0.4
+- **重大升级：将编译链从 GCC 升级为 Clang**，提供更好的编译性能和错误提示
+- **新增 C++17 标准支持**，可在编译参数中选择 `-std=c++17`
+- 优化 Makefile 文件读取，修复 mk 文件解析问题
+- 新增 `toolbar` Hook，支持在工具栏添加自定义按钮
+- 新增 `on_app_init` Hook，支持应用启动时执行初始化操作
+- 优化编译缓存机制，提升编译速度
+- 改进错误提示和日志输出
+- 优化内存使用，减少应用占用空间
+
 ### v1.0.3
 - 新增插件 `author` 字段支持，显示插件作者信息
 - 新增 `run_menu` Hook，支持在运行按钮下拉菜单添加自定义项
@@ -344,6 +354,7 @@ Akode 的开发离不开以下开源项目：
 
 - [Sora Editor](https://github.com/Rosemoe/sora-editor) - 代码编辑器组件
 - [Termux](https://github.com/termux/termux-app) - 终端模拟器
+- [Clang/LLVM](https://clang.llvm.org/) - C/C++ 编译器工具链
 - [libsu](https://github.com/topjohnwu/libsu) - Root 权限访问库
 - [Material Components](https://github.com/material-components/material-components-android) - Material Design 组件库
 - [C4droid](https://baike.baidu.com/item/c4droid/8215130) - Android 平台 C/C++ 编程工具
