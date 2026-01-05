@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.0.4-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.5-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -44,6 +44,23 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - 文件重命名、删除、复制路径
 - 快速定位当前文件
 - 记住上次打开的文件和目录
+- **Git 状态显示**（修改/新增/冲突等）
+
+### 🔀 Git 集成（新增）
+- Git 仓库克隆（支持 HTTPS）
+- 私有仓库认证（用户名/密码/Token）
+- Git 凭据加密存储
+- 提交、推送、拉取操作
+- 分支管理
+- 远程仓库管理
+- 文件状态实时显示
+
+### 📦 项目管理（新增）
+- 新建项目向导
+- Git 初始化选项
+- 最近项目列表
+- 项目配置保存和恢复
+- 自动保存功能（可配置间隔）
 
 ### 💻 终端模拟器
 - 完整的终端环境
@@ -259,6 +276,7 @@ int main() {
 - **编译命令管理**：自定义编译和运行命令
 - **Clang 编译参数**：C 语言编译参数（默认：`-lm -ldl -llog -lz -std=c99 -Wfatal-errors -Os -s -pie`）
 - **Clang++ 编译参数**：C++ 编译参数（默认：`-lm -ldl -llog -lz -std=c++17 -Wfatal-errors -Os -s -pie`）
+- **Android API Level**：目标 Android API 版本（21-35，默认 21）
 
 ### 功能设置
 - **启用 Root 运行**：使用 su 以 root 权限执行程序
@@ -309,6 +327,35 @@ plugin.zip
 
 ## 📝 更新日志
 
+### v1.0.5
+- **新增 Git 集成功能**
+  - 支持 Git 仓库克隆（支持私有仓库认证）
+  - Git 凭据管理（加密存储）
+  - Git 提交、推送、拉取操作
+  - 分支管理功能
+  - 文件列表显示 Git 状态标识（M/A/U/C 等）
+- **新增项目管理功能**
+  - 新建项目向导（支持 Git 初始化选项）
+  - 最近项目列表
+  - 项目配置保存和恢复
+- **新增 Android API Level 配置**
+  - 支持 API 21 到 API 35 版本选择
+  - 编译器目标参数可配置
+- **新增应用内版本更新**
+  - 自动检查 GitHub releases 版本
+  - 支持 APK 下载和安装
+  - Markdown 格式发布说明渲染
+- **新增自动保存功能**
+  - 支持定时静默保存文件
+  - 可配置保存间隔
+- **优化编译器参数处理**
+  - 区分 C 和 C++ 文件编译参数
+  - 自动过滤 C++ 专用参数
+- **UI 优化**
+  - 工具栏响应式布局（窄屏适配）
+  - 暗色主题对话框样式统一
+  - 远程仓库添加对话框
+
 ### v1.0.4
 - **重大升级：将编译链从 GCC 升级为 Clang**，提供更好的编译性能和错误提示
 - **新增 C++17 标准支持**，可在编译参数中选择 `-std=c++17`
@@ -357,6 +404,9 @@ Akode 的开发离不开以下开源项目：
 - [Clang/LLVM](https://clang.llvm.org/) - C/C++ 编译器工具链
 - [libsu](https://github.com/topjohnwu/libsu) - Root 权限访问库
 - [Material Components](https://github.com/material-components/material-components-android) - Material Design 组件库
+- [JGit](https://www.eclipse.org/jgit/) - Java Git 实现库
+- [OkHttp](https://square.github.io/okhttp/) - HTTP 客户端
+- [Markwon](https://github.com/noties/Markwon) - Markdown 渲染库
 - [C4droid](https://baike.baidu.com/item/c4droid/8215130) - Android 平台 C/C++ 编程工具
 - [simpleC](https://github.com/luoyesiqiu/simpleC) - Android 平台 C/C++ 编程工具
 
