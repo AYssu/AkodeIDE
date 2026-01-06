@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.0.5-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.6-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -21,13 +21,13 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - 符号快捷输入栏
 - 支持多种编辑器主题
 
-### 🧠 LSP 智能支持（新增）
+### 🧠 LSP 智能支持
 - 集成 Clangd LSP 服务
 - 实时语法错误检测
 - 智能代码补全
 - 函数签名提示
 - 代码诊断和错误标记
-- 支持跳转到定义（规划中）
+- 跳转到定义
 
 ### �  编译运行
 - 内置 GCC/G++ 编译器（首次启动自动安装）
@@ -46,7 +46,7 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - 记住上次打开的文件和目录
 - **Git 状态显示**（修改/新增/冲突等）
 
-### 🔀 Git 集成（新增）
+### 🔀 Git 集成
 - Git 仓库克隆（支持 HTTPS）
 - 私有仓库认证（用户名/密码/Token）
 - Git 凭据加密存储
@@ -55,7 +55,7 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - 远程仓库管理
 - 文件状态实时显示
 
-### 📦 项目管理（新增）
+### 📦 项目管理
 - 新建项目向导
 - Git 初始化选项
 - 最近项目列表
@@ -79,7 +79,7 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - **插件 Hook 系统**（.hook 文件）
 - 插件 PATH 环境变量自动注入
 
-## 🔌 插件安装脚本（新增）
+## 🔌 插件安装脚本
 
 插件可以通过 `.install` 文件定义安装流程，支持交互式安装向导。
 
@@ -125,7 +125,7 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 }
 ```
 
-## 🪝 插件 Hook 系统（新增）
+## 🪝 插件 Hook 系统
 
 插件可以通过 `.hook` 文件在特定事件时执行自定义操作。
 
@@ -326,6 +326,16 @@ plugin.zip
 详见 [插件安装脚本文档](docs/插件安装脚本文档.md)（Hook 系统部分）
 
 ## 📝 更新日志
+
+### v1.0.6
+- **修复大屏设备输入法焦点问题**
+  - 添加 onWindowFocusChanged 回调方法
+  - 修复 iPad 等大屏设备点击唤起输入法后焦点丢失的问题
+- **编译进度对话框深色主题适配**
+  - 根据当前编辑器主题动态设置对话框背景色
+  - 动态调整进度指示器颜色和轨道颜色
+  - 文本颜色随主题自动切换
+  - 编译错误信息对话框主题颜色适配
 
 ### v1.0.5
 - **新增 Git 集成功能**
