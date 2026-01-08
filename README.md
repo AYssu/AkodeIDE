@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.0.6-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.7-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -30,13 +30,30 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - 跳转到定义
 
 ### ❤️  编译运行
-- 内置 GCC/G++ 编译器（首次启动自动安装）
+- 内置 Clang/Clang++ 编译器（首次启动自动安装）
+- **OLLVM 代码混淆支持**（基于 Clang 18.1.8）
 - 支持 C 语言（.c）和 C++ 语言（.cpp/.cc/.cxx）
 - 自定义编译参数
 - 自定义编译命令管理
 - 支持 Root 权限运行程序
 - 编译错误定位和标记
 - 编译缓存（相同代码跳过编译）
+
+### 🔐 OLLVM 代码混淆
+
+内置 OLLVM 混淆器，支持多种代码保护方式，增强逆向难度：
+
+| 参数 | 说明 |
+|------|------|
+| `-mllvm -fla` | 控制流平坦化（Control Flow Flattening） |
+| `-mllvm -sub` | 指令替换（Instruction Substitution） |
+| `-mllvm -bcf` | 虚假控制流（Bogus Control Flow） |
+| `-mllvm -ibr` | 间接分支（Indirect Branching） |
+| `-mllvm -sobf` | 字符串混淆（String Obfuscation） |
+| `-mllvm -split` | 基本块分割（Basic Block Splitting） |
+| `-mllvm -split_num=N` | 指定分割次数（N 为数字） |
+
+使用方式：在「设置 → 编译设置」中开启对应的混淆选项即可。
 
 ### 📁 文件管理
 - 侧边栏文件浏览器
@@ -326,6 +343,29 @@ plugin.zip
 详见 [插件安装脚本文档](docs/插件安装脚本文档.md)（Hook 系统部分）
 
 ## 📝 更新日志
+
+### v1.0.7
+- **新增 OLLVM 混淆 Clang 工具链**
+  - 基于 Clang 18.1.8 + OLLVM 混淆器
+  - 支持代码混淆保护，增强逆向难度
+  - 自动检测工具链版本，版本不匹配时提示重新安装
+- **支持的混淆参数**
+  - `-mllvm -fla`：控制流平坦化（Control Flow Flattening）
+  - `-mllvm -sub`：指令替换（Instruction Substitution）
+  - `-mllvm -bcf`：虚假控制流（Bogus Control Flow）
+  - `-mllvm -ibr`：间接分支（Indirect Branching）
+  - `-mllvm -sobf`：字符串混淆（String Obfuscation）
+  - `-mllvm -split`：基本块分割（Basic Block Splitting）
+  - `-mllvm -split_num=3`：指定分割次数
+- **编辑器优化**
+  - 更优秀的代码补全策略，提升补全准确性和响应速度
+  - 支持快捷键拆解多行（选中代码后快速拆分）
+  - 支持快速格式化代码（基于 clang-format）
+- **UI 优化**
+  - 优化对话框输入框样式，更符合 M3 设计规范
+  - 对话框按钮颜色统一为 M3 紫色
+  - 新建项目页面自动聚焦到项目名称输入框
+  - 项目名称支持中文命名
 
 ### v1.0.6
 - **修复大屏设备输入法焦点问题**
