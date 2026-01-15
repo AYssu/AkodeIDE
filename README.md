@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.0.7-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.8-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -20,6 +20,7 @@ Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE）�
 - 多文件标签页管理（最多10个）
 - 符号快捷输入栏
 - 支持多种编辑器主题
+- 支持cmake make ninja
 
 ### 🧠 LSP 智能支持
 - 集成 Clangd LSP 服务
@@ -343,6 +344,16 @@ plugin.zip
 详见 [插件安装脚本文档](docs/插件安装脚本文档.md)（Hook 系统部分）
 
 ## 📝 更新日志
+### v1.0.8
+- **新增 Tools 工具链**
+  - 新增cmake编译器
+  - 新增make支持
+  - 新增ninja支持
+  - 完善fla在大部分情况加密报错
+  
+- **UI 优化**
+  - 优化对话框输入框样式
+  - 优化主页主题
 
 ### v1.0.7
 - **新增 OLLVM 混淆 Clang 工具链**
