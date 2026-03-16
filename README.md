@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.0.9-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.1.0-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -344,6 +344,64 @@ plugin.zip
 详见 [插件安装脚本文档](docs/插件安装脚本文档.md)（Hook 系统部分）
 
 ## 📝 更新日志
+
+### v1.1.0
+- **项目导入和管理功能**
+  - 实现项目导入对话框，支持手动输入路径和文件夹浏览
+  - 集成 DocumentFile API 用于文件选择器功能
+  - 添加项目长按删除功能，支持仅删除配置或整个项目文件夹
+  - 增加导入项目菜单项和相应的处理逻辑
+  - 实现 URI 路径解析和项目路径验证功能
+  - 添加 third.json 配置文件的创建和读取
+  - 扩展最近项目管理器支持全局项目列表
+  - 引入 slf4j 日志记录功能
+
+- **APK 生成和签名功能**
+  - 集成 FileProvider 支持文件分享功能
+  - 实现完整的 APK 生成流程，包括源码编译、模板处理和文件注入
+  - 创建 Material Design 3 风格的进度对话框，支持丝滑动画效果
+  - 添加 ARM64 架构编译支持和可执行文件注入功能
+  - 实现 APK 安装功能，支持 Android 7.0 以上版本的 FileProvider
+  - 添加文件管理器集成和路径复制功能
+  - 实现临时文件自动清理机制
+  - 优化进度更新逻辑，支持分步骤进度显示
+  - 新增 ApkParser 类实现 APK 文件元数据解析功能
+  - 新增 ApkRepackager 类实现 APK 重打包流程控制
+  - 新增 ApkUtils 类提供 APK 文件操作工具方法
+  - 新增 BinaryXmlEditor 类使用 ARSCLib 修改二进制 XML 文件
+  - 新增 CertificateBuilder 类使用 BouncyCastle 生成证书
+  - 新增 CustomApkSigner 类使用 Google apksig 库进行签名
+
+- **AI 辅助开发工具**
+  - 新增编译代码工具(compileCode)支持文件编译验证
+  - 新增获取诊断信息工具(getDiagnostics)显示错误警告
+  - 新增创建文件工具(createFile)支持动态文件生成
+  - 新增符号列表工具(getSymbols)分析代码结构
+  - 新增重命名文件工具(renameFile)支持文件重构
+  - 新增删除文件工具(deleteFile)管理项目文件
+  - 新增查找引用工具(findReferences)追踪符号使用
+  - 添加诊断信息缓存机制供 AI 访问
+  - 扩展 AI 系统提示包含 C++ 开发专业指导
+  - 集成 clangd LSP 诊断验证流程
+
+- **构建配置和 CMake 功能**
+  - 更新 targetSdk 至 34 以支持 Android 15
+  - 调整混淆配置，降低混淆深度并增加保护规则
+  - 在 CMake 对话框中添加编译并运行选项
+  - 修复项目删除对话框的空指针异常问题
+  - 使用 libs.versions.toml 管理依赖版本
+  - 为 CMake 编译添加 ScrollView 滚动支持
+  - 修改 release 构建配置，使用 proguard-android.txt 替代 proguard-android-optimize.txt
+  - 在 debug 模式下禁用代码混淆和资源压缩，便于调试
+  - 启用 BlackObfuscator 混淆功能
+
+- **ClangdClient 优化**
+  - 在 ClangdClient 中添加 ensureExecutorAvailable 方法确保执行器可用
+  - 在所有异步操作前调用 ensureExecutorAvailable 检查执行器状态
+  - 修改 stop 方法不立即关闭 executor，避免新请求冲突
+  - 添加 cleanup 方法用于完全清理资源
+  - 在 EditorActivity 中启用 OLLVM 混淆参数进行 C++ 编译
+
 ### v1.0.9
 - **Bug 修复与优化**
   - 修复多项已知 Bug，提升应用稳定性
