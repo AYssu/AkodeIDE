@@ -3,19 +3,10 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.1.1-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.1.0-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
-
-## 📣 Akode 宣传文案
-
-还在找一款真正能在 Android 上认真写 C/C++ 的 IDE？
-
-`Akode` 面向需要 **C++ 编译器 + 语言分析 + 代码格式化 + 智能补全 + 高颜值界面** 的开发者，提供从编辑、诊断到编译运行的一站式体验。  
-无论是学习、日常开发，还是在移动端快速验证想法，Akode 都能让你更专注于代码本身。
-
-如果你也在做 C/C++ 开发，欢迎加入 Akode 官方 QQ 群交流反馈：**1003648526**
 
 ## ✨ 功能特性
 
@@ -353,25 +344,6 @@ plugin.zip
 详见 [插件安装脚本文档](docs/插件安装脚本文档.md)（Hook 系统部分）
 
 ## 📝 更新日志
-
-### v1.1.1
-- **编辑体验优化**
-  - 注释快捷键按文件类型自动适配：`CMakeLists.txt` / `*.cmake` 使用 `#`，C/C++ 继续使用 `//`
-  - 修复部分场景下编辑器高亮渲染异常（`Failed to read span`）导致的连续警告日志问题
-- **工具链与智能分析优化**
-  - 修复 `clang` 版本升级后的 `resource-dir` 残留硬编码问题，统一改为动态探测安装版本
-  - 优化 LSP 相关路径解析逻辑，减少因目录名不一致导致的 `clangd` 初始化异常
-- **AI 聊天与数据库能力增强**
-  - 增强 AI 聊天数据库结构与读写能力，优化会话数据组织
-  - 补充上下文构建、上下文预算与冲突处理相关能力，提升长会话稳定性
-  - 新增/完善工具编排与请求构建链路，提升 AI 工具调用一致性
-- **APK 打包与重打包能力升级**
-  - 优化 APK 重打包流程，提升稳定性并减少失败场景
-  - 改进图标替换与资源处理路径，增强对复杂资源映射场景的兼容
-  - 提升签名与构建流程衔接，降低安装阶段异常概率
-- **构建与工程支持更新**
-  - 持续完善 CMake/Make/Ninja 与项目导入流程的协同体验
-  - 修复构建配置细节问题，优化编译链与编辑器功能联动
 
 ### v1.1.0
 - **项目导入和管理功能**
