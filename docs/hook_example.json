@@ -99,6 +99,23 @@
       ]
     }
   ],
+
+  "completion": [
+    {
+      "language": "cpp",
+      "trigger": "funcwrap",
+      "label": "函数封装模板",
+      "desc": "快速生成函数定义",
+      "insert": "static inline int func(int a, int b) {\n    return a + b;\n}"
+    },
+    {
+      "language": "cpp",
+      "trigger": "classp",
+      "label": "类模板（含私有成员）",
+      "desc": "生成类定义骨架",
+      "insert": "class ClassName {\npublic:\n    ClassName() = default;\n    ~ClassName() = default;\n\nprivate:\n    int value_ = 0;\n};"
+    }
+  ],
   
   "run_menu": [
     {
