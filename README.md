@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Language-C%2FC%2B%2B-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Version-1.1.1-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.1.2-orange.svg" alt="Version">
 </p>
 
 Akode 是一款专为 Android 平台设计的 C/C++ 集成开发环境（IDE），让你可以在手机上编写、编译和运行 C/C++ 代码。无需电脑，随时随地进行 C/C++ 开发。
@@ -393,6 +393,17 @@ plugin.zip
 详见 [插件安装脚本文档](docs/插件安装脚本文档.md)（Hook 系统部分）
 
 ## 📝 更新日志
+
+
+### v1.1.1=2
+- **基础能力升级**
+  - 移除该死的压缩机制调整为更快速的解压机制
+  - 调整zsh安装的缓存bug导致最后一秒贼慢的问题
+  - 调整插件管理安装插件过大导致的解压异常耗时,fuck掉了
+  - 调整了一个不起眼的bug
+  - 修复了键盘在某些时候抽风导致的输入不了问题
+
+
 
 ### v1.1.1
 - **混淆与构建链升级**
